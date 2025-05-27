@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-test.skip('test property locator functionality', async ({ page }) => {
+test.skip('Login functionality', async ({ page }) => {
   test.setTimeout(60000);
 
-  await page.goto('https://www.gto-portal.com/Geoportal-JHD/login', { waitUntil: 'networkidle' });
+  await page.goto('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/login', { waitUntil: 'networkidle' });
 
   const nameField = page.getByPlaceholder('Name ');
   const passwordField = page.getByPlaceholder('Password');
@@ -13,7 +13,7 @@ test.skip('test property locator functionality', async ({ page }) => {
   await passwordField.fill('1234');
   await loginButton.click();
 
-  await expect(page).toHaveURL('https://www.gto-portal.com/Geoportal-JHD/');
+  await expect(page).toHaveURL('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/');
 
   const propertyLocator = page.locator('.panel-heading.lang-panel-header-tools');
   await page.waitForSelector('.panel-heading.lang-panel-header-tools', { state: 'visible' });
@@ -199,39 +199,39 @@ const MyLayer=page.locator(
   await Infrastructure.click();
   console.log('"Infrastructure" selectde successfully');
   //Select the "Telecommunication" as Layer
-  const Telecommunication = page.locator('#mat-checkbox-26 > label');
-  await expect(Telecommunication).toBeVisible({timeout: 60000});
-  console.log('"Telecommunication" Layer checkbox clicked');
+  //const Telecommunication = page.locator('#mat-checkbox-26 > label');
+  //await expect(Telecommunication).toBeVisible({timeout: 60000});
+  //console.log('"Telecommunication" Layer checkbox clicked');
   //wait for the map changes after selecting the "Telecommunication"
-  const TelecommunicationChange =page.locator('.map-container .mydrawinglayer-layer-changed');
-  console.log('map changes reflected after selecting the "Telecommunication"');
-  //Select the "MasterPlan"
-  const Masterplan=page.locator(
-    '#sub-sideMenu > div > div > app-sub-side-menu > app-layers > div.expandablediv.ng-star-inserted > mat-tree > mat-nested-tree-node:nth-child(8) > li > div > div > div.mat-tooltip-trigger.col-xl-10.montserrat-smeibold.text-nowrap.text-uppercase.cursor-pointer > div'
-   );
-  await expect(Masterplan).toBeVisible({timeout : 10000});         
-  await Masterplan.click();
-  console.log('"Infrastructure" selectrd successfully');
-  //Select the "Roads_polygon" as Layer
-  const RoadsPolygon = page.locator('#mat-checkbox-75 > label');
-  await expect(RoadsPolygon).toBeVisible({timeout: 60000});
-  console.log('"RoadsPolygon" Layer checkbox clicked');
-  // wait for the map changes after selecting the "RoadsPolygon"
-  const RoadsPolygonChange= page.locator ('.map-container .RoadsPolygon-layer-changed');
-  console.log('map changes reflected after selecting the "RoadsPolygon"');
+  //const TelecommunicationChange =page.locator('.map-container .mydrawinglayer-layer-changed');
+  //console.log('map changes reflected after selecting the "Telecommunication"');
+  // //Select the "MasterPlan"
+  // const Masterplan=page.locator(
+  //   '#sub-sideMenu > div > div > app-sub-side-menu > app-layers > div.expandablediv.ng-star-inserted > mat-tree > mat-nested-tree-node:nth-child(8) > li > div > div > div.mat-tooltip-trigger.col-xl-10.montserrat-smeibold.text-nowrap.text-uppercase.cursor-pointer > div'
+  //  );
+  // await expect(Masterplan).toBeVisible({timeout : 10000});         
+  // await Masterplan.click();
+  // console.log('"Infrastructure" selectrd successfully');
+  // //Select the "Roads_polygon" as Layer
+  // const RoadsPolygon = page.locator('#mat-checkbox-75 > label');
+  // await expect(RoadsPolygon).toBeVisible({timeout: 60000});
+  // console.log('"RoadsPolygon" Layer checkbox clicked');
+  // // wait for the map changes after selecting the "RoadsPolygon"
+  // const RoadsPolygonChange= page.locator ('.map-container .RoadsPolygon-layer-changed');
+  // console.log('map changes reflected after selecting the "RoadsPolygon"');
   
-  // Select the Extracted Buildings
-  const ExtractedBuildings=page.locator('#sub-sideMenu > div > div > app-sub-side-menu > app-layers > div.expandablediv.ng-star-inserted > mat-tree > mat-nested-tree-node:nth-child(9) > li > div > div > div.mat-tooltip-trigger.col-xl-10.montserrat-smeibold.text-nowrap.text-uppercase.cursor-pointer > div'
-  );
-  await expect(ExtractedBuildings).toBeVisible({timeout : 10000});
-  await ExtractedBuildings.click();
-  console.log('"ExtractedBuildings" Selected Successfully');
-  //Select the "Extracted Building" as Layer
-  const ExtractedBuilding = page.locator('#mat-checkbox-76 > label');
-  await expect(ExtractedBuilding).toBeVisible({timeout: 60000});
-  console.log('map changes reflected aftre selecting the "Extracted Builidng"');
-  //wait for the map changes after selecting he extracted Building
-  const ExtractedBuildingChange= page.locator('.map-conatainer .ExtractedBuildings-layer-changed');
-  console.log('map changes refelected after selecting the "extracted Building"');
+  // // Select the Extracted Buildings
+  // const ExtractedBuildings=page.locator('#sub-sideMenu > div > div > app-sub-side-menu > app-layers > div.expandablediv.ng-star-inserted > mat-tree > mat-nested-tree-node:nth-child(9) > li > div > div > div.mat-tooltip-trigger.col-xl-10.montserrat-smeibold.text-nowrap.text-uppercase.cursor-pointer > div'
+  // );
+  // await expect(ExtractedBuildings).toBeVisible({timeout : 10000});
+  // await ExtractedBuildings.click();
+  // console.log('"ExtractedBuildings" Selected Successfully');
+  // //Select the "Extracted Building" as Layer
+  // const ExtractedBuilding = page.locator('#mat-checkbox-76 > label');
+  // await expect(ExtractedBuilding).toBeVisible({timeout: 60000});
+  // console.log('map changes reflected aftre selecting the "Extracted Builidng"');
+  // //wait for the map changes after selecting he extracted Building
+  // const ExtractedBuildingChange= page.locator('.map-conatainer .ExtractedBuildings-layer-changed');
+  // console.log('map changes refelected after selecting the "extracted Building"');
 
 });

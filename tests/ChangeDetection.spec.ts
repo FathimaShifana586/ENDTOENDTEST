@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.skip('test property locator functionality', async ({ page }) => {
+test.skip('Change detection property locator functionality', async ({ page }) => {
   test.setTimeout(60000);
 
   await page.goto('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/login', { waitUntil: 'networkidle' });   // use current url

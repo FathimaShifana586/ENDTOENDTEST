@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 test.skip('test property locator functionality', async ({ page }) => {
   test.setTimeout(60000);
 
-  await page.goto('https://www.gto-portal.com/geoportalv2/login', { waitUntil: 'networkidle' });
+  await page.goto('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/login', { waitUntil: 'networkidle' });
 
   const nameField = page.getByPlaceholder('Name ');
   const passwordField = page.getByPlaceholder('Password');
@@ -14,7 +14,7 @@ test.skip('test property locator functionality', async ({ page }) => {
   await passwordField.fill('1234');
   await loginButton.click();
 
-  await expect(page).toHaveURL('https://www.gto-portal.com/geoportalv2/');
+  await expect(page).toHaveURL('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/');
 
   // const propertyLocator = page.locator('//*[@id="app-property-locator"]/app-property-locator/div/div[1]/div[2]/button');
   // await page.waitForSelector('//*[@id="app-property-locator"]/app-property-locator/div/div[1]/div[2]/button', { state: 'visible' });

@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 test.skip('test property locator functionality', async ({ page }) => {
   test.setTimeout(60000);
 
-  await page.goto('https://www.gto-portal.com/Geoportal-JHD/login', { waitUntil: 'networkidle' });
+  await page.goto('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/login', { waitUntil: 'networkidle' });
 
   const nameField = page.getByPlaceholder('Name ');
   const passwordField = page.getByPlaceholder('Password');
@@ -14,7 +14,7 @@ test.skip('test property locator functionality', async ({ page }) => {
   await passwordField.fill('1234');
   await loginButton.click();
 
-  await expect(page).toHaveURL('https://www.gto-portal.com/Geoportal-JHD/');
+  await expect(page).toHaveURL('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD');
 
   const propertyLocator = page.locator('.panel-heading.lang-panel-header-tools');  ////*[@id="app-property-locator"]/app-property-locator/div/div[1]/div[2]/button //#app-property-locator > app-property-locator > div > div.cdk-drag.cdk-drag-handle.cursor-move.cardheader.gold-h-bg.d-flex.justify-content-between.px-3.py-2.align-items-center.montserrat-smeibold.panel-heading.lang-panel-header-tools.rounded-top > div.d-flex.align-items-center > button
   await page.waitForSelector('.panel-heading.lang-panel-header-tools', { state: 'visible' });
