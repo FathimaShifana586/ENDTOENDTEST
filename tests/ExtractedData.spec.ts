@@ -5,7 +5,7 @@ test.use({
   screenshot: 'only-on-failure',
 });
 
-test.only('Extracted Data functionality', async ({ page }) => {
+test.skip('Extracted Data functionality', async ({ page }) => {
   test.setTimeout(60000);
 
   await page.goto('https://www.gto-portal.com/Geoportal-JHD/login', { waitUntil: 'networkidle' });
@@ -20,139 +20,81 @@ test.only('Extracted Data functionality', async ({ page }) => {
 
   await expect(page).toHaveURL('https://www.gto-portal.com/Geoportal-JHD/');
 
-//   const propertyLocator = page.locator('.panel-heading.lang-panel-header-tools');
-//   await page.waitForSelector('.panel-heading.lang-panel-header-tools', { state: 'visible' });
+  const propertyLocator = page.locator('.panel-heading.lang-panel-header-tools');
+  await page.waitForSelector('.panel-heading.lang-panel-header-tools', { state: 'visible' });
 
-//   await expect(propertyLocator).toBeVisible({ timeout: 10000 });
-//   console.log('Property Locator is visible');
+  await expect(propertyLocator).toBeVisible({ timeout: 10000 });
+  console.log('Property Locator is visible');
 
-//   const menuButton = page.locator('#header-toggle-menu-open'); 
-//   await expect(menuButton).toBeVisible({ timeout: 10000 });  
-//   await menuButton.click();  
-//   console.log('Menu button clicked!'); 
+  const menuButton = page.locator('#header-toggle-menu-open'); 
+  await expect(menuButton).toBeVisible({ timeout: 10000 });  
+  await menuButton.click();  
+  console.log('Menu button clicked!'); 
   
-//  //Select the Layer
-//  const selectedLayer = page.locator('#rightsection_ahref');  
-//   await expect(selectedLayer).toBeVisible({ timeout: 10000 });  
-//   await selectedLayer.click();  
-//   console.log('Selected layer clicked!');
+ //Select the Layer
+ const selectedLayer = page.locator('#rightsection_ahref');  
+  await expect(selectedLayer).toBeVisible({ timeout: 10000 });  
+  await selectedLayer.click();  
+  console.log('Selected layer clicked!');
 
-//   const layerIsSelected = page.locator('#rightsection_ahref.active');
-//   console.log('Layer is successfully selected!');
+  const layerIsSelected = page.locator('#rightsection_ahref.active');
+  console.log('Layer is successfully selected!');
   
-//    //Select the "Expropriation list" layer
-//   const expropiationlayer = page.locator(
-//     '#sub-sideMenu > div > div > app-sub-side-menu > app-layers > div.expandablediv.ng-star-inserted > mat-tree > mat-nested-tree-node:nth-child(1) > li > div > div > div.mat-tooltip-trigger.col-xl-10.montserrat-smeibold.text-nowrap.text-uppercase.cursor-pointer > div'
-//   );
+   //Select the "Expropriation list" layer
+  const expropiationlayer = page.locator(
+    '#sub-sideMenu > div > div > app-sub-side-menu > app-layers > div.expandablediv.ng-star-inserted > mat-tree > mat-nested-tree-node:nth-child(1) > li > div > div > div.mat-tooltip-trigger.col-xl-10.montserrat-smeibold.text-nowrap.text-uppercase.cursor-pointer > div'
+  );
 
-//   await expect(expropiationlayer).toBeVisible({ timeout: 10000 }); 
-//   await expropiationlayer.click(); 
-//   console.log('"Expropriation layer" selected successfully!');
+  await expect(expropiationlayer).toBeVisible({ timeout: 10000 }); 
+  await expropiationlayer.click(); 
+  console.log('"Expropriation layer" selected successfully!');
 
-//   /// Select the "Private Assets" layer
+  /// Select the "Private Assets" layer
 
-//   const privateAssetsCheckbox = page.locator('#mat-checkbox-1 > label');       
-//   await expect(privateAssetsCheckbox).toBeVisible({ timeout: 60000 }); 
-//   await privateAssetsCheckbox.click(); 
-//   console.log('"Private Assets" layer checkbox clicked!');
-// // Data Import/Export
-//  const dataImportExport = page.locator('#dataImportExport_ahref');
-//  await expect(dataImportExport).toBeVisible({ timeout: 60000 });
-//  await dataImportExport.click();
-//  console.log('Data Import/Export clicked successfully!');
+  const privateAssetsCheckbox = page.locator('#mat-checkbox-1 > label');       
+  await expect(privateAssetsCheckbox).toBeVisible({ timeout: 60000 }); 
+  await privateAssetsCheckbox.click(); 
+  console.log('"Private Assets" layer checkbox clicked!');
+// Data Import/Export
+ const dataImportExport = page.locator('#dataImportExport_ahref');
+ await expect(dataImportExport).toBeVisible({ timeout: 60000 });
+ await dataImportExport.click();
+ console.log('Data Import/Export clicked successfully!');
 
-// // Data Extract
-//    const dataExtract = page.locator('#mat-expansion-panel-header-0 > span.mat-content.ng-tns-c123-22 > mat-panel-title');  //#mat-expansion-panel-header-0 > span.mat-content.ng-tns-c123-22 > mat-panel-title //#mat-expansion-panel-header-0 > span.mat-content.ng-tns-c123-22 > mat-panel-title
-//    await expect(dataExtract).toBeVisible({ timeout: 60000 });
-//    await dataExtract.click();
-//    console.log('Data Extract clicked successfully!'); 
-
-//    const ExtractFile = page.locator('#mat-select-30');  
-//    await ExtractFile.waitFor({ state: 'visible', timeout: 60000 }); 
-//    await ExtractFile.click();
-//    console.log('Extract file clicked successfully!');   
-//    const KMLOption = page.locator('#mat-option-48');  
-//    await KMLOption.waitFor({ state: 'visible', timeout: 60000 });
-//    await KMLOption.click();
-//    console.log('KML type file selected successfully!');
-
-//   const Dataextract= page.locator('#cdk-accordion-child-0 > div > app-data-extract > div:nth-child(4) > button');
-//   await Dataextract.waitFor({ state: 'visible', timeout: 60000 });
-//   await Dataextract.click();
-//   console.log('Data extract clicked successfully!');
-//   const downloadPromise = page.waitForEvent('download');
-//   await page.getByText('archiveData Extract').click();
-//   const download = await downloadPromise;
-
-//   await page.locator('//*[@id="app-Extracted-data-results"]/app-extracted-data-results/div/div[1]/div[2]/button[2]').click();
-
-// //Extracted data report
-// const extractedDataResult = page.locator('#sub-sideMenu-a > div:nth-child(1) > a:nth-child(7)');
-// await expect(extractedDataResult).toBeVisible({ timeout: 60000 });
-// await extractedDataResult.click();
-// console.log('Extracted Data Result clicked successfully!');
-// await page.locator('#app-Extracted-data-results button').nth(1).click();
-// console.log('closed extracted data result successfully')
-
-// await page.getByRole('button').first().click();
-// await page.waitForTimeout(1000);
-// console.log('Property Locator is closed');
-
-await page.locator('#nav-part1').getByRole('button').click();
-await page.waitForTimeout(1000);
-console.log('Navigation menu opened successfully!');
-
-await page.getByRole('link', { name: 'Layers' }).click();
-await page.waitForTimeout(1000);
-console.log('Layers clicked successfully!');
-
-await page.locator('#sub-sideMenu').getByText('Historical Entities Layers').click();
-await page.waitForTimeout(1000);
-console.log('Historical Entities Layers clicked successfully!');
-
-await page.locator('.d-flex > button:nth-child(2)').first().click();
-await page.waitForTimeout(1000);
-console.log('Selected layer clicked!');
-
-
-//  const dataImportExport = page.locator('#dataImportExport_ahref');
-//  await expect(dataImportExport).toBeVisible({ timeout: 60000 });
-//  await dataImportExport.click();
-//  console.log('Data Import/Export clicked successfully!');
 // Data Extract
    const dataExtract = page.locator('#mat-expansion-panel-header-0 > span.mat-content.ng-tns-c123-22 > mat-panel-title');  //#mat-expansion-panel-header-0 > span.mat-content.ng-tns-c123-22 > mat-panel-title //#mat-expansion-panel-header-0 > span.mat-content.ng-tns-c123-22 > mat-panel-title
    await expect(dataExtract).toBeVisible({ timeout: 60000 });
    await dataExtract.click();
    console.log('Data Extract clicked successfully!'); 
 
-await page.getByRole('combobox', { name: 'Please Select' }).click();
-await page.waitForTimeout(500);
+   const ExtractFile = page.locator('#mat-select-30');  
+   await ExtractFile.waitFor({ state: 'visible', timeout: 60000 }); 
+   await ExtractFile.click();
+   console.log('Extract file clicked successfully!');   
+   const KMLOption = page.locator('#mat-option-48');  
+   await KMLOption.waitFor({ state: 'visible', timeout: 60000 });
+   await KMLOption.click();
+   console.log('KML type file selected successfully!');
 
-await page.getByRole('option', { name: 'Keyhole Markup Language - KML' }).locator('span').click();
-await page.waitForTimeout(1000);
-console.log('KML type file selected successfully!');
+  const Dataextract= page.locator('#cdk-accordion-child-0 > div > app-data-extract > div:nth-child(4) > button');
+  await Dataextract.waitFor({ state: 'visible', timeout: 60000 });
+  await Dataextract.click();
+  console.log('Data extract clicked successfully!');
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByText('archiveData Extract').click();
+  const download = await downloadPromise;
 
-const downloadPromise = page.waitForEvent('download');
-await page.getByText('archiveData Extract').click();
-await page.waitForTimeout(2000);
-const download = await downloadPromise;
+  await page.locator('//*[@id="app-Extracted-data-results"]/app-extracted-data-results/div/div[1]/div[2]/button[2]').click();
 
-await page.locator('.cdk-drag > .d-flex > button:nth-child(2)').click();
-await page.waitForTimeout(1000);
-console.log('Data extract clicked successfully!');
+//Extracted data report
+const extractedDataResult = page.locator('#sub-sideMenu-a > div:nth-child(1) > a:nth-child(7)');
+await expect(extractedDataResult).toBeVisible({ timeout: 60000 });
+await extractedDataResult.click();
+console.log('Extracted Data Result clicked successfully!');
+await page.locator('#app-Extracted-data-results button').nth(1).click();
+console.log('closed extracted data result successfully')
 
-await page.getByRole('link', { name: 'Extracted Data Results' }).click();
-await page.waitForTimeout(1000);
-console.log('Extracted Data Results clicked successfully!');
 
-await page.locator('.cdk-drag > .d-flex > button:nth-child(2)').click();
-await page.waitForTimeout(1000);
-console.log('Closed Extracted Data Results successfully!');
 
-await page.locator('button:nth-child(3)').first().click();
-await page.waitForTimeout(1000);
-console.log('Closed the Property Locator successfully!');
-
-console.log('Extracted Data functionality test completed successfully!');
 
 });

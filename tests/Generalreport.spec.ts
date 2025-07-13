@@ -1,19 +1,24 @@
 import { test, expect } from '@playwright/test';
+import { Console, log } from 'console';
+test.use({  
+   ignoreHTTPSErrors: true,
+   screenshot: 'only-on-failure',
+   });
 
-test.skip('test property locator functionality', async ({ page }) => {
+test.skip('General report functionality', async ({ page }) => {
   test.setTimeout(60000);
 
-  await page.goto('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/login', { waitUntil: 'networkidle' });
+  await page.goto('https://www.gto-portal.com/Geoportal-JHD/login', { waitUntil: 'networkidle' });
 
   const nameField = page.getByPlaceholder('Name ');
   const passwordField = page.getByPlaceholder('Password');
   const loginButton = page.getByRole('button', { name: 'Login' });
 
-  await nameField.fill('jhd-fathima');
-  await passwordField.fill('1234');
+  await nameField.fill('QA-GTO');
+  await passwordField.fill('Qa12345!Qa');
   await loginButton.click();
 
-  await expect(page).toHaveURL('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD');
+  await expect(page).toHaveURL('https://www.gto-portal.com/Geoportal-JHD/');
 
   const propertyLocator = page.locator('.panel-heading.lang-panel-header-tools');
   await page.waitForSelector('.panel-heading.lang-panel-header-tools', { state: 'visible' });
@@ -55,19 +60,51 @@ test.skip('test property locator functionality', async ({ page }) => {
 //    await page.getByRole('button', { name: 'Print' }).click();
    //console.log('Report printed successfully')
 
-  await page.getByLabel('Property List Report').locator('div').nth(3).click();
-  await page.getByRole('option', { name: 'Property List Report' }).locator('span').click();
-  await page.getByPlaceholder('Property Id ').click();
-  await page.getByPlaceholder('Property Id ').fill('1010');
-  await page.getByRole('button', { name: 'Add' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.locator('.mat-checkbox-inner-container').first().click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.getByPlaceholder('Report Title *').click();
-  await page.getByPlaceholder('Report Title *').fill('test');
-  await page.getByRole('button', { name: 'Print' }).click();
-  console.log('Report printed successfully')
-  await page.getByRole('button', { name: 'Close' }).click()
-  console.log('Report printed successfully')
+await page.getByLabel('Property List Report').locator('div').nth(3).click();
+await page.waitForTimeout(1000);
+console.log('Property List Report selected successfully!');
+
+await page.getByRole('option', { name: 'Property List Report' }).locator('span').click();
+await page.waitForTimeout(1000);
+console.log('Property List Report option selected successfully!');
+
+await page.getByPlaceholder('Property Id ').click();
+await page.waitForTimeout(500);
+
+await page.getByPlaceholder('Property Id ').fill('1010');
+await page.waitForTimeout(1000);
+console.log('Property Id filled successfully!');
+
+await page.getByRole('button', { name: 'Add' }).click();
+await page.waitForTimeout(1000);
+console.log('Property Id added successfully!');
+
+await page.getByRole('button', { name: 'Next' }).click();
+await page.waitForTimeout(1000);
+console.log('Next button clicked!');
+
+await page.locator('.mat-checkbox-inner-container').first().click();
+await page.waitForTimeout(1000);
+console.log('Property Id checkbox clicked successfully!');
+
+await page.getByRole('button', { name: 'Next' }).click();
+await page.waitForTimeout(1000);
+console.log('Next button clicked successfully!');
+
+await page.getByPlaceholder('Report Title *').click();
+await page.waitForTimeout(500);
+
+await page.getByPlaceholder('Report Title *').fill('test');
+await page.waitForTimeout(1000);
+console.log('Report Title filled successfully!');
+
+await page.getByRole('button', { name: 'Print' }).click();
+await page.waitForTimeout(2000);
+console.log('Report printed successfully');
+
+await page.getByRole('button', { name: 'Close' }).click();
+await page.waitForTimeout(1000);
+console.log('Report closed successfully');
+
 
  });

@@ -5,7 +5,7 @@ test.use({
   screenshot: 'only-on-failure',
 });
 
-test.skip('test property locator functionality', async ({ page }) => {
+test.skip('Data Extract functionality', async ({ page }) => {
   test.setTimeout(60000);
 
   await page.goto('https://www.gto-portal.com/Geoportal-JHD/login', { waitUntil: 'networkidle' });

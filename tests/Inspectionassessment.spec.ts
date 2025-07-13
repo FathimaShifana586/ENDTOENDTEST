@@ -1,19 +1,25 @@
 import { test, expect } from '@playwright/test';
+import { Console,log } from 'console';
+test.use({  
+   ignoreHTTPSErrors: true,
+   screenshot: 'only-on-failure',
+   });
 
-test.skip('test property locator functionality', async ({ page }) => {
+
+test.skip('Inspection assessment functionality', async ({ page }) => {
   test.setTimeout(60000);
 
-  await page.goto('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/login', { waitUntil: 'networkidle' });
+  await page.goto('https://www.gto-portal.com/Geoportal-JHD/login', { waitUntil: 'networkidle' });
 
   const nameField = page.getByPlaceholder('Name ');
   const passwordField = page.getByPlaceholder('Password');
   const loginButton = page.getByRole('button', { name: 'Login' });
 
-  await nameField.fill('jhd-fathima');
-  await passwordField.fill('1234');
+  await nameField.fill('QA-GTO');
+  await passwordField.fill('Qa12345!Qa');
   await loginButton.click();
 
-  await expect(page).toHaveURL('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/');
+  await expect(page).toHaveURL('https://www.gto-portal.com/Geoportal-JHD/');
 
   const propertyLocator = page.locator('.panel-heading.lang-panel-header-tools');
   await page.waitForSelector('.panel-heading.lang-panel-header-tools', { state: 'visible' });
@@ -44,7 +50,7 @@ test.skip('test property locator functionality', async ({ page }) => {
     await page.getByPlaceholder('Title').click();
     await page.getByPlaceholder('Title').fill('test');
     await page.getByText('Select Employee').click();
-    await page.getByRole('option', { name: 'JHD-Fathima' }).locator('span').click();
+    await page.getByRole('option', { name: 'JHD-Waleed' }).locator('span').click();
     await page.getByPlaceholder('Property Id ').click();
     await page.getByPlaceholder('Property Id ').fill('1010');
     await page.getByPlaceholder('Description').click();
@@ -57,6 +63,6 @@ test.skip('test property locator functionality', async ({ page }) => {
     console.log('Inspection request closed successfully');
 
 
-
+ 
 
 });
