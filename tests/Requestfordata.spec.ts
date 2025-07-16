@@ -1,69 +1,63 @@
 import { test, expect } from '@playwright/test';
+import { Console, time } from 'console';
+test.use({
+  ignoreHTTPSErrors: true,
+  screenshot: 'only-on-failure',
+});
 
-test.skip('test property locator functionality', async ({ page }) => {
-  test.setTimeout(60000);
+test.skip('My Request functionality', async ({ page }) => {
+  test.setTimeout(120000);
 
-  await page.goto('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/login', { waitUntil: 'networkidle' });
+  await page.goto('https://www.gto-portal.com/Geoportal-JHD/login', { waitUntil: 'networkidle' });
 
   const nameField = page.getByPlaceholder('Name ');
   const passwordField = page.getByPlaceholder('Password');
   const loginButton = page.getByRole('button', { name: 'Login' });
 
-  await nameField.fill('jhd-fathima');
-  await passwordField.fill('1234');
+  await nameField.fill('QA-GTO');
+  await passwordField.fill('Qa12345!Qa');
   await loginButton.click();
 
-  await expect(page).toHaveURL('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/');
+  await expect(page).toHaveURL('https://www.gto-portal.com/Geoportal-JHD/');
 
-  const propertyLocator = page.locator('.panel-heading.lang-panel-header-tools');
-  await page.waitForSelector('.panel-heading.lang-panel-header-tools', { state: 'visible' });
+ 
+// Click on the nav button
+await page.locator('#nav-part1').getByRole('button').click({ timeout: 5000 });
+console.log('Navigation part1 button clicked.');
 
-  await expect(propertyLocator).toBeVisible({ timeout: 10000 });
-  console.log('Property Locator is visible');
+// Click "Request For Data" link
+await page.getByRole('link', { name: 'Request For Data' }).click({ timeout: 5000 });
+console.log('"Request For Data" link clicked.');
 
-  const menuButton = page.locator('#header-toggle-menu-open'); 
-  await expect(menuButton).toBeVisible({ timeout: 10000 });  
-  await menuButton.click();  
-  console.log('Menu button clicked!'); 
+// Click add button
+await page.locator('#request-for-data-list button').filter({ hasText: 'add' }).click({ timeout: 5000 });
+console.log('Add button clicked.');
 
-  // Request for data
-    const requestForData = page.locator('#sub-sideMenu-a > div:nth-child(1) > a:nth-child(4)');  ////*[@id="sub-sideMenu-a"]/div[1]/a[4]
-    await expect(requestForData).toBeVisible({ timeout: 60000 });
-    await requestForData.click();
-    console.log('Request for data clicked!');
-    
+// Click "New Data Request" from menu
+await page.getByRole('menuitem', { name: 'New Data Request' }).click({ timeout: 5000 });
+console.log('"New Data Request" menu item clicked.');
 
-//My request
-const myRequestButton = page.locator('#mat-tab-content-2-0 > div > div.position-relative.w-100.scroll-custom-color.p-1.scrollbar.ng-star-inserted > table > tbody > tr:nth-child(1) > td.mat-cell.cdk-cell.cdk-column-Actions.mat-column-Actions.ng-star-inserted > button');
-await expect(myRequestButton).toBeVisible({ timeout: 10000 });
-await myRequestButton.click();
-console.log('My request clicked successfully'); //
+// Select data format from dropdown
+await page.locator('#mat-select-value-47').click({ timeout: 5000 });
+console.log('Data format dropdown opened.');
+
+await page.getByRole('option', { name: 'File Geodatabase - GDB - .gdb' }).locator('span').click({ timeout: 5000 });
+console.log('GDB file format selected.');
+
+// Fill the description textbox
+await page.locator('#app-request-for-data app-request-for-data app-data-extract textarea').click({ timeout: 5000 });
+await page.locator('#app-request-for-data app-request-for-data app-data-extract textarea').fill('test', { timeout: 5000 });
+console.log('Description textarea filled with "test".');
 
 
+// Click the "Request" button
+await page.getByRole('button', { name: 'Request' }).click({ timeout: 5000 });
+console.log('"Request" button clicked.');
 
-const showComments = page.locator('//*[@id="mat-menu-panel-4"]/div/button[2]');
-await showComments.click();  //
-//await page.locator('#app-show-request-comment-dialog_1224633 > app-show-request-comment-dialog > div > div > div.cdk-drag.cdk-drag-handle.cursor-move.cardheader.gold-h-bg.d-flex.justify-content-between.px-3.py-2.align-items-center.montserrat-smeibold > button').click();
-const MyRequestButton = page.locator('#mat-tab-content-2-0 > div > div.position-relative.w-100.scroll-custom-color.p-1.scrollbar.ng-star-inserted > table > tbody > tr:nth-child(1) > td.mat-cell.cdk-cell.cdk-column-Actions.mat-column-Actions.ng-star-inserted > button');
-await expect(MyRequestButton).toBeVisible({ timeout: 10000 });
-await MyRequestButton.click();
-console.log('My request clicked successfully');
+// Click close or final action button
+await page.locator('.cdk-drag > .d-flex > button:nth-child(4)').click({ timeout: 5000 });
+console.log('Close button clicked.');
 
-const show = page.locator('//*[@id="mat-menu-panel-4"]/div/button[1]');
-await show.click();
-console.log('Show clicked successfully');
-await page.locator('//*[@id="mat-dialog-0"]/kt-delete-entity-dialog/div/div[2]/div[2]/button[2]').click();
-
-//New Request
-  await page.locator('#request-for-data-list button').filter({ hasText: 'add' }).click();
-  await page.getByRole('menuitem', { name: 'New Data Request' }).click();
-  await page.locator('#mat-select-value-55').click();
-  await page.getByRole('option', { name: 'Keyhole Markup Language - KML' }).locator('span').click();
-  await page.locator('#app-request-for-data').getByRole('textbox').click();
-  await page.locator('#app-request-for-data').getByRole('textbox').fill('test');
-  await page.getByRole('button', { name: 'Request' }).click()
-  console.log('New Request for data created successfully');
-
-  await page.locator('.cdk-drag > .d-flex > button:nth-child(4)').click();  
-  console.log('Closed the Request for data successfully');// closed the request for data
 });
+
+

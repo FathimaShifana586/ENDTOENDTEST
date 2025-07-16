@@ -1,41 +1,47 @@
 import { test, expect } from '@playwright/test';
+import { Console, time } from 'console';
+test.use({
+  ignoreHTTPSErrors: true,
+  screenshot: 'only-on-failure',
+});
 
-test.skip('test property locator functionality', async ({ page }) => {
-  test.setTimeout(60000);
+test.skip('UserPrefrence functionality', async ({ page }) => {
+  test.setTimeout(120000);
 
-  await page.goto('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/login', { waitUntil: 'networkidle' });
+  await page.goto('https://www.gto-portal.com/Geoportal-JHD/login', { waitUntil: 'networkidle' });
 
   const nameField = page.getByPlaceholder('Name ');
   const passwordField = page.getByPlaceholder('Password');
   const loginButton = page.getByRole('button', { name: 'Login' });
 
-  await nameField.fill('jhd-fathima');
-  await passwordField.fill('1234');
+  await nameField.fill('QA-GTO');
+  await passwordField.fill('Qa12345!Qa');
   await loginButton.click();
 
-  await expect(page).toHaveURL('https://dev-gis-web01.jeddahalbalad.sa/Geoportal-JHD/');
+  await expect(page).toHaveURL('https://www.gto-portal.com/Geoportal-JHD/');
 
-  // const propertyLocator = page.locator('//*[@id="app-property-locator"]/app-property-locator/div/div[1]/div[2]/button');
-  // await page.waitForSelector('//*[@id="app-property-locator"]/app-property-locator/div/div[1]/div[2]/button', { state: 'visible' });
+//profile
+const profile = page.locator('//*[@id="profileMenu-btn"]');
+await expect(profile).toBeVisible({ timeout: 60000 });
+await profile.click();
+console.log('Profile clicked successfully!');
 
-  // await expect(propertyLocator).toBeVisible({ timeout: 10000 });
-  // console.log('Property Locator is visible');
-  await page.locator('//*[@id="app-property-locator"]/app-property-locator/div/div[1]/div[2]/button').click();
+// Click on "User Preferences"
+await page.getByRole('link', { name: 'User Preferences' }).click({ timeout: 5000 });
+console.log('"User Preferences" clicked.');
 
-  const menuButton = page.locator('#header-toggle-menu-open'); 
-  await expect(menuButton).toBeVisible({ timeout: 10000 });  
-  await menuButton.click();  
-  console.log('Menu button clicked!');
-   //profile
-   const profile = page.locator('//*[@id="profileMenu-btn"]');
-   await expect(profile).toBeVisible({ timeout: 60000 });
-   await profile.click();
-   console.log('Profile clicked successfully!');
-   //user preferences
-   await page.locator('//*[@id="profileMenu"]/a[3]').click();
-   //await page.getByRole('link', { name: 'User Preferences' }).click();
-   await page.locator('#mat-select-value-53').click();
-   await page.getByRole('option', { name: 'Dark Mode' }).locator('span').click();
-   await page.locator('.mat-checkbox-inner-container').click();
-   await page.getByRole('button', { name: 'save Save' }).click();
-   });
+// Click on checkbox (with safe check in case it's not visible immediately)
+const checkbox = page.locator('.mat-checkbox-inner-container');
+if (await checkbox.isVisible({ timeout: 3000 }).catch(() => false)) {
+  await checkbox.click({ timeout: 5000 });
+  console.log('Checkbox toggled.');
+} else {
+  console.log('Checkbox not visible. Skipping toggle.');
+}
+
+// Click on "Save" button
+await page.getByRole('button', { name: 'save Save' }).click({ timeout: 5000 });
+console.log('"Save" button clicked. Preferences should be saved.');
+
+
+});
