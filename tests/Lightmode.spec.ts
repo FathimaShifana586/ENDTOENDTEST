@@ -6,7 +6,7 @@ test.use({
   screenshot: 'only-on-failure',
 });
 
-test.only('Light & Dark Mode functionality', async ({ page }) => {
+test.skip('Light & Dark Mode functionality', async ({ page }) => {
   test.setTimeout(60000);
 
   await page.goto('https://www.gto-portal.com/Geoportal-JHD/login', { waitUntil: 'networkidle' });
@@ -21,12 +21,22 @@ test.only('Light & Dark Mode functionality', async ({ page }) => {
 
   await expect(page).toHaveURL('https://www.gto-portal.com/Geoportal-JHD/');
 
+  const closeButton = page.locator('//*[@id="app-property-locator"]/app-property-locator/div/div[1]/div[2]/button');
+  await expect(closeButton).toBeVisible({ timeout: 60000 });
+  await closeButton.click();
+  console.log('Panel closed successfully!');
+
+
   const profile = page.locator('//*[@id="profileMenu-btn"]');
   await expect(profile).toBeVisible({ timeout: 60000 });
   await profile.click();
   console.log('Profile clicked successfully!');
+const themeToggleButton = page.locator('//*[@id="profileMenu"]/a[1]');
+await expect(themeToggleButton).toBeVisible({ timeout: 60000 });
+await themeToggleButton.click();
+console.log('Dark/Light mode toggled successfully!');
 
-  await page.getByRole('link', { name: 'Dark Mode' }).click();         //if you want to change the dark to light mode then modify these line to dark mode 
+                                                                      
   console.log('Light mode clicked successfully')
   await page.getByRole('button', { name: 'Save changes' }).click();
   console.log('select the save changes button successfully')

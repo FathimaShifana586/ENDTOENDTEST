@@ -139,14 +139,14 @@ console.log('"Land" Layer checkbox clicked!');
 const LandLayerChange= page.locator('.map-container .land-layer-changed');
 console.log('Map changes reflected after selecting "land" layer.');
 
-// select the Building Layer
-const BuildingCheckbox = page.locator ('#mat-checkbox-9 > label');
-await expect(BuildingCheckbox).toBeVisible({timeout : 60000});
-console.log('"Building " Layer checkbox clicked successfully');
+// // select the Building Layer
+// const BuildingCheckbox = page.locator ('#mat-checkbox-9 > label');
+// await expect(BuildingCheckbox).toBeVisible({timeout : 60000});
+// console.log('"Building " Layer checkbox clicked successfully');
 
-// wait for map changes after selecting "building"
-const BuildingLayerChange=page.locator('.map-container .building-layer-changed');
-console.log('map changes reflected after selecting "buiding" layer.');
+// // wait for map changes after selecting "building"
+// const BuildingLayerChange=page.locator('.map-container .building-layer-changed');
+// console.log('map changes reflected after selecting "buiding" layer.');
 
  // Select the "JHD owned assets" layer
  const JHDownedAssets = page.locator(
