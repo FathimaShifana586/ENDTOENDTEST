@@ -20,11 +20,14 @@ test.skip('General report functionality', async ({ page }) => {
 
   await expect(page).toHaveURL('https://www.gto-portal.com/Geoportal-JHD/');
 
-  const propertyLocator = page.locator('.panel-heading.lang-panel-header-tools');
-  await page.waitForSelector('.panel-heading.lang-panel-header-tools', { state: 'visible' });
+  const closeButton = page.locator('#app-property-locator app-property-locator > div > div:nth-child(1) > div:nth-child(2) > button');
 
-  await expect(propertyLocator).toBeVisible({ timeout: 10000 });
-  console.log('Property Locator is visible');
+  if (await closeButton.count() > 0 && await closeButton.isVisible()) {
+    await closeButton.click();
+    console.log('Property Locator close button clicked successfully!');
+  } else {
+    console.log('Property Locator close button not visible. Skipping.');
+  }
 
   const menuButton = page.locator('#header-toggle-menu-open'); 
   await expect(menuButton).toBeVisible({ timeout: 10000 });  
@@ -36,29 +39,6 @@ test.skip('General report functionality', async ({ page }) => {
    await expect(selectedGeneralReport).toBeVisible({ timeout: 60000 });
    await selectedGeneralReport.click();
    console.log('Selected general report clicked!');
- 
-//    await page.locator('#mat-select-48').click();
-//    await page.getByRole('option', { name: 'Property List Report' }).locator('span').click();
-//    await page.getByPlaceholder('Property Id ').click();
-//    await page.getByPlaceholder('Property Id ').fill('1010');
-//    await page.getByRole('button', { name: 'Add' }).click();
-//    await page.getByRole('button', { name: 'next'}).click();
-//    /////const propertyId =  page.locator('.mat-checkbox-inner-container').first().click();
-//    ///// const PropertyType = page.locator('#mat-checkbox-2 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
-//    ///// const buildingname =  page.locator('#mat-checkbox-3 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
-//    await page.evaluate(() => {
-//      window.scrollTo(0, document.body.scrollHeight);
-//    });
-   
-//    const nextButton = page.locator('#cdk-step-content-0-1 > div.mt-0.ng-star-inserted > button:nth-child(2)');
-//    ////// await expect(nextButton).toBeVisible({ timeout: 100000 });
-//    //////await page.getByRole('button', { name: 'Next' }).click();
-//    await nextButton.click();
-//    console.log('Next button clicked!');
-//    await page.getByPlaceholder('Report Title *').click();
-//    await page.getByPlaceholder('Report Title *').fill('test');
-//    await page.getByRole('button', { name: 'Print' }).click();
-   //console.log('Report printed successfully')
 
 await page.getByLabel('Property List Report').locator('div').nth(3).click();
 await page.waitForTimeout(1000);
@@ -105,6 +85,5 @@ console.log('Report printed successfully');
 await page.getByRole('button', { name: 'Close' }).click();
 await page.waitForTimeout(1000);
 console.log('Report closed successfully');
-
 
  });

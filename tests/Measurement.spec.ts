@@ -90,6 +90,4 @@ const closeMeasurement = page.locator('//*[@id="app-measure"]/app-measure/div/di
 await expect(closeMeasurement).toBeVisible({ timeout: 60000 });  
 await closeMeasurement.click();
 console.log('Close Measurement clicked successfully!');
-
-
 });

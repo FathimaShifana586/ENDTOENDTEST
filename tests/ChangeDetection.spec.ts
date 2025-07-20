@@ -62,9 +62,6 @@ console.log('Close the Change Detection');
 //Statistics
 
   await page.locator('#sec-dep > a:nth-child(2)').click();
-  //await page.locator('//*[@id="mat-select-46"]').click();
-    // const Pleaseselect = page.locator('//*[@id="mat-select-46"]');
-    // await Pleaseselect.click();
   await page.locator('#mat-select-value-57').getByText('Please Select').click();
   const BuildingChangeOption = page.locator('text=Building Change');
   await BuildingChangeOption.waitFor({ state: 'visible', timeout: 60000 });

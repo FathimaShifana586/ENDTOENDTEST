@@ -35,4 +35,5 @@ test.skip('test property locator functionality', async ({ page }) => {
   await page.getByPlaceholder('Search here...').click();
   await page.getByPlaceholder('Search here...').fill('10');
   await page.getByRole('option', { name: '10' }).locator('span').click();
+  console.log('Successfully tested the general search')
 });

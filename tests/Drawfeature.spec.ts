@@ -110,8 +110,6 @@ const text = page.locator('//*[@id="4_addText"]');
 await expect(text).toBeVisible({ timeout: 60000 });
 await text.click();
 console.log('Text clicked successfully!');
-
-
 //Close Draw Feature
 const closeDrawFeature = page.locator('//*[@id="app-draw-vector"]/app-draw-vector/div/div[1]/div[2]/button[2]');
 await expect(closeDrawFeature).toBeVisible({ timeout: 60000 });

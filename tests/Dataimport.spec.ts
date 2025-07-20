@@ -52,7 +52,7 @@ test.skip('Data Import functionality', async ({ page }) => {
  console.log('KML type file selected successfully!');
 
 
-  //await page.getByRole('option', { name: 'Keyhole Markup Language .kml' }).locator('span').click();
+//await page.getByRole('option', { name: 'Keyhole Markup Language .kml' }).locator('span').click();
   await page.getByLabel('Data Import').getByText('open_in_browserBrowse File').click();
   await page.waitForTimeout(20000); // Pauses for 10 seconds (10000 milliseconds)
 

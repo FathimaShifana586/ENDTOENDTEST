@@ -41,6 +41,4 @@ await page.getByText('print Print').click();
   
 await page.locator('app-print button').nth(1).click(); 
 
-
-
  });

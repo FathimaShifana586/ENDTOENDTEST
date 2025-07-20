@@ -19,12 +19,6 @@ test.skip('Logout functionality', async ({ page }) => {
   await loginButton.click();
 
   await expect(page).toHaveURL('https://www.gto-portal.com/Geoportal-JHD/');
-
-  // const propertyLocator = page.locator('//*[@id="app-property-locator"]/app-property-locator/div/div[1]/div[2]/button');
-  // await page.waitForSelector('//*[@id="app-property-locator"]/app-property-locator/div/div[1]/div[2]/button', { state: 'visible' });
-
-  // await expect(propertyLocator).toBeVisible({ timeout: 10000 });
-  // console.log('Property Locator is visible');
   await page.locator('//*[@id="app-property-locator"]/app-property-locator/div/div[1]/div[2]/button').click();
 
   const menuButton = page.locator('#header-toggle-menu-open'); 

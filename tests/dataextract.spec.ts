@@ -49,31 +49,31 @@ test.skip('Data Extract functionality', async ({ page }) => {
   await expropiationlayer.click(); 
   console.log('"Expropriation layer" selected successfully!');
 
-  /// Select the "Private Assets" layer
+  // Select the "Private Assets" layer
 
   const privateAssetsCheckbox = page.locator('#mat-checkbox-1 > label');       
   await expect(privateAssetsCheckbox).toBeVisible({ timeout: 60000 }); 
   await privateAssetsCheckbox.click(); 
   console.log('"Private Assets" layer checkbox clicked!');
-// Data Import/Export
+  // Data Import/Export
  const dataImportExport = page.locator('#dataImportExport_ahref');
  await expect(dataImportExport).toBeVisible({ timeout: 60000 });
  await dataImportExport.click();
  console.log('Data Import/Export clicked successfully!');
 
-// Data Extract
+  // Data Extract
    const dataExtract = page.locator('#mat-expansion-panel-header-0 > span.mat-content.ng-tns-c123-22 > mat-panel-title');  //#mat-expansion-panel-header-0 > span.mat-content.ng-tns-c123-22 > mat-panel-title //#mat-expansion-panel-header-0 > span.mat-content.ng-tns-c123-22 > mat-panel-title
    await expect(dataExtract).toBeVisible({ timeout: 60000 });
    await dataExtract.click();
    console.log('Data Extract clicked successfully!'); 
 
-//zoomin
+  //zoomin
  
   const zoomIn = page.locator('//*[@id="0_zoomIn"]');
   await expect(zoomIn).toBeVisible({ timeout: 60000 });
   await zoomIn.click();
   console.log('Zoom In clicked successfully!');   
-//extract file
+  //extract file
    const ExtractFile = page.locator('#mat-select-30');  
    await ExtractFile.waitFor({ state: 'visible', timeout: 60000 }); 
    await ExtractFile.click();
@@ -90,8 +90,4 @@ test.skip('Data Extract functionality', async ({ page }) => {
 
   await page.locator('//*[@id="app-Extracted-data-results"]/app-extracted-data-results/div/div[1]/div[2]/button[2]').click();
 
-//   const Dataextract= page.locator('#cdk-accordion-child-0 > div > app-data-extract > div:nth-child(4) > button');  //
-//   await Dataextract.waitFor({ state: 'visible', timeout: 60000 });
-//   await Dataextract.click();
-//   console.log('Data extract clicked successfully!');
 });

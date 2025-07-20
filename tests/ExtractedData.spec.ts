@@ -94,7 +94,4 @@ console.log('Extracted Data Result clicked successfully!');
 await page.locator('#app-Extracted-data-results button').nth(1).click();
 console.log('closed extracted data result successfully')
 
-
-
-
 });

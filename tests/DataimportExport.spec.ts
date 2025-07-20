@@ -81,12 +81,6 @@ test.skip('Data Import/Export functionality', async ({ page }) => {
   await Dataextract.click();
   console.log('Data extract clicked successfully!');
 
-  
-
-
-//await page.locator('#sub-sideMenu > div > div > app-sub-side-menu > app-data-import-export > div > div > div.cardheader.gold-h-bg.d-flex.justify-content-between.px-3.py-2.align-items-center.montserrat-smeibold > div.d-flex.align-items-center > button:nth-child(3)').click();
-//console.log('Close the data extract successfully!');
-
 //Data Import
 
  const dataImport = page.locator('#mat-expansion-panel-header-1 > span.mat-content.ng-tns-c123-26 > mat-panel-title');
@@ -102,9 +96,6 @@ test.skip('Data Import/Export functionality', async ({ page }) => {
  await kmlOption.waitFor({ state: 'visible', timeout: 60000 });
  await kmlOption.click();
  console.log('KML type file selected successfully!');
- // await page.getByLabel('Data Import').getByText('open_in_browserBrowse File').click();
- // await page.getByLabel('Data Import').getByText('open_in_browserBrowse File').setInputFiles('gpDataFile_28750.zip');
- // await page.getByLabel('Data Import').getByText('ios_shareSubmit').click();
 
 const Submit= page.locator('#cdk-accordion-child-1 > div > app-data-import > div:nth-child(4) > button');
 await Submit.waitFor({ state: 'visible', timeout: 60000 });
@@ -145,8 +136,5 @@ await KMLExport.waitFor({ state: 'visible', timeout: 60000 });
 await KMLExport.click();
 console.log('KML Export clicked successfully!');
 await page.locator('#cdk-accordion-child-3 > div > app-graphic-export > div > button').click();
-
-
-
 
 });
