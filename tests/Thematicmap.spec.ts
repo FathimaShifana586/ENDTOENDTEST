@@ -52,9 +52,6 @@ test.skip('Thematic map functionality', async ({ page }) => {
   await page.getByRole('button', { name: 'visibility Show' }).click({ timeout: 5000 });
   console.log('"Show" button clicked.');
 
-// await page.locator('#sub-sideMenu').getByRole('button').nth(1).click({ timeout: 5000 });
-// console.log('Close button on side menu clicked.');
-// Locate the close button using XPath and click it
 const closeMenuBtn = page.locator('xpath=//*[@id="mat-menu-panel-3"]/div/button[2]');
 
 if (await closeMenuBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
